@@ -54,9 +54,9 @@ public class GUI extends JFrame {
 		pnlNorth = new JPanel();
 		contentPane.add(pnlNorth, BorderLayout.NORTH);
 		//Declaran las etiquetas del frame
-		JLabel lblTitle = new JLabel("Kmeans - Aglomerativo");
+		JLabel lblTitle = new JLabel("Apriori algorithm");
 		lblTitle.setHorizontalAlignment(SwingConstants.CENTER);
-		JLabel lblK_1 = new JLabel("Clusters");
+		JLabel lblK_1 = new JLabel("Rules");
 		lblK_1.setHorizontalAlignment(SwingConstants.RIGHT);
 		//Declara los botones del frame
 		btnChoose = new JButton("Choose File");			
@@ -73,8 +73,8 @@ public class GUI extends JFrame {
 		txtfClusters.setText("3");
 		txtfClusters.setColumns(10);
 		//Declara los botones para seleccionar la implementacion con la que se desea trabajar
-		rdbtnWeka = new JRadioButton("Aglomerativo");		
-		rdbtnOwn = new JRadioButton("Kmeans");
+		rdbtnWeka = new JRadioButton("Weka");		
+		rdbtnOwn = new JRadioButton("Own");
 		rdbtnOwn.setSelected(true);		
 		
 		btngOption = new ButtonGroup();
