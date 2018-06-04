@@ -18,6 +18,8 @@ import javax.swing.JLabel;
 import javax.swing.SwingConstants;
 import javax.swing.JRadioButton;
 import javax.swing.JCheckBox;
+import javax.swing.JComboBox;
+import javax.swing.DefaultComboBoxModel;
 
 public class GUI extends JFrame {
 
@@ -27,16 +29,19 @@ public class GUI extends JFrame {
 	public JRadioButton rdbtnWeka;
 	public JRadioButton rdbtnOwn;
 	public JTextField txtfClassifierAttribute;
+	public JComboBox cmbox_Metrictype;
+	public JTextField txtf_Minmetric;
 	//Este objeto almacenara los datos del archivo a leer
 	public Data dat;
 	public JTextField txtfFile;
-	public JTextField txtfClusters;
+	public JTextField txtfRules;
 	private JPanel contentPane;	
 	private JPanel pnlNorth;
 	private JButton btnChoose;
-	private JButton btnStart;
+	private JButton btnStart;	
 	private ButtonGroup btngOption;
 	JCheckBox chckbxSelectAttributes;
+	
 	
 	
 	//Constructor de la clase
@@ -69,9 +74,9 @@ public class GUI extends JFrame {
 		txtfFile.setColumns(10);		
 		//Declara el TextField para ingresar la contidad de particiones a 
 		//consideras en el cross validation
-		txtfClusters = new JTextField();
-		txtfClusters.setText("3");
-		txtfClusters.setColumns(10);
+		txtfRules = new JTextField();
+		txtfRules.setText("3");
+		txtfRules.setColumns(10);
 		//Declara los botones para seleccionar la implementacion con la que se desea trabajar
 		rdbtnWeka = new JRadioButton("Weka");		
 		rdbtnOwn = new JRadioButton("Own");
@@ -88,6 +93,18 @@ public class GUI extends JFrame {
 		txtfClassifierAttribute.setColumns(10);
 		
 		chckbxSelectAttributes = new JCheckBox("Select attributes");
+		
+		cmbox_Metrictype = new JComboBox();
+		cmbox_Metrictype.setModel(new DefaultComboBoxModel(new String[] {"Confidence", "Lift", "Laverage", "Conviction"}));
+		
+		JLabel lblMetricType = new JLabel("Metric type");
+		
+		txtf_Minmetric = new JTextField();
+		txtf_Minmetric.setText("0.9");
+		txtf_Minmetric.setColumns(10);
+		
+		JLabel lblMinMetric = new JLabel("Min metric");
+		lblMinMetric.setHorizontalAlignment(SwingConstants.RIGHT);
 		
 	    //Configura el layout del pnlNorth
 		GroupLayout gl_pnlNorth = new GroupLayout(pnlNorth);
@@ -109,16 +126,27 @@ public class GUI extends JFrame {
 							.addComponent(lblClasificationIndex, GroupLayout.PREFERRED_SIZE, 111, GroupLayout.PREFERRED_SIZE)
 							.addPreferredGap(ComponentPlacement.RELATED)
 							.addComponent(txtfClassifierAttribute, GroupLayout.PREFERRED_SIZE, 37, GroupLayout.PREFERRED_SIZE)
-							.addPreferredGap(ComponentPlacement.RELATED, 48, Short.MAX_VALUE)
-							.addComponent(chckbxSelectAttributes)
-							.addGap(18)
-							.addComponent(lblK_1, GroupLayout.PREFERRED_SIZE, 52, GroupLayout.PREFERRED_SIZE)
+							.addPreferredGap(ComponentPlacement.RELATED, 21, Short.MAX_VALUE)
+							.addGroup(gl_pnlNorth.createParallelGroup(Alignment.LEADING)
+								.addComponent(chckbxSelectAttributes)
+								.addGroup(gl_pnlNorth.createSequentialGroup()
+									.addPreferredGap(ComponentPlacement.RELATED)
+									.addComponent(lblMinMetric, GroupLayout.PREFERRED_SIZE, 76, GroupLayout.PREFERRED_SIZE)
+									.addPreferredGap(ComponentPlacement.RELATED)
+									.addComponent(txtf_Minmetric, GroupLayout.PREFERRED_SIZE, 36, GroupLayout.PREFERRED_SIZE)))
+							.addGap(6)
+							.addGroup(gl_pnlNorth.createParallelGroup(Alignment.LEADING)
+								.addComponent(lblK_1, GroupLayout.PREFERRED_SIZE, 52, GroupLayout.PREFERRED_SIZE)
+								.addComponent(lblMetricType, GroupLayout.PREFERRED_SIZE, 64, GroupLayout.PREFERRED_SIZE))
 							.addPreferredGap(ComponentPlacement.UNRELATED)
-							.addComponent(txtfClusters, GroupLayout.PREFERRED_SIZE, 36, GroupLayout.PREFERRED_SIZE)
-							.addGap(13)
-							.addComponent(rdbtnWeka)
-							.addPreferredGap(ComponentPlacement.RELATED)
-							.addComponent(rdbtnOwn, GroupLayout.PREFERRED_SIZE, 80, GroupLayout.PREFERRED_SIZE)
+							.addGroup(gl_pnlNorth.createParallelGroup(Alignment.LEADING)
+								.addComponent(cmbox_Metrictype, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+								.addGroup(gl_pnlNorth.createSequentialGroup()
+									.addComponent(txtfRules, GroupLayout.PREFERRED_SIZE, 36, GroupLayout.PREFERRED_SIZE)
+									.addGap(13)
+									.addComponent(rdbtnWeka)
+									.addPreferredGap(ComponentPlacement.RELATED)
+									.addComponent(rdbtnOwn, GroupLayout.PREFERRED_SIZE, 80, GroupLayout.PREFERRED_SIZE)))
 							.addGap(52)))
 					.addContainerGap())
 		);
@@ -137,9 +165,18 @@ public class GUI extends JFrame {
 						.addComponent(chckbxSelectAttributes)
 						.addComponent(txtfClassifierAttribute, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
 						.addComponent(lblK_1)
-						.addComponent(txtfClusters, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+						.addComponent(txtfRules, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
 						.addComponent(rdbtnWeka)
 						.addComponent(rdbtnOwn))
+					.addPreferredGap(ComponentPlacement.RELATED)
+					.addGroup(gl_pnlNorth.createParallelGroup(Alignment.LEADING)
+						.addGroup(gl_pnlNorth.createSequentialGroup()
+							.addGap(3)
+							.addComponent(lblMinMetric))
+						.addGroup(gl_pnlNorth.createParallelGroup(Alignment.BASELINE)
+							.addComponent(cmbox_Metrictype, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+							.addComponent(lblMetricType)
+							.addComponent(txtf_Minmetric, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)))
 					.addContainerGap())
 		);
 		//Establece el layout configurado

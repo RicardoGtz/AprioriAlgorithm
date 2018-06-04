@@ -12,6 +12,7 @@ import weka.associations.Apriori;
 import weka.classifiers.evaluation.ThresholdCurve;
 import weka.clusterers.HierarchicalClusterer;
 import weka.core.Instances;
+import weka.core.SelectedTag;
 import weka.core.Utils;
 import weka.gui.visualize.PlotData2D;
 import weka.gui.visualize.ThresholdVisualizePanel;
@@ -43,7 +44,7 @@ public class StartHandler implements ActionListener {
 			ref.dat.setClassifierAttribite(Integer.parseInt(ref.txtfClassifierAttribute.getText()));
 		//Valida que los campos no esten vacios y que exista un archivo seleccionado
 		if(!ref.txtfFile.getText().equals("None selected file"))			
-			if(!ref.txtfClusters.getText().equals(""))
+			if(!ref.txtfRules.getText().equals(""))
 				//Verifica el tipo de implementaciona a utilizar
 				if(ref.rdbtnOwn.isSelected())
 					ownApriori();
@@ -67,6 +68,9 @@ public class StartHandler implements ActionListener {
 			dataSource.setClassIndex(dataSource.numAttributes() - 1);
 			//Crea un objeto de tipo Apriori
 			Apriori mdlApriori=new Apriori();
+			mdlApriori.setNumRules(Integer.parseInt(ref.txtfRules.getText()));
+			mdlApriori.setMetricType( new SelectedTag(ref.cmbox_Metrictype.getSelectedIndex(), Apriori.TAGS_SELECTION));
+			mdlApriori.setMinMetric(Double.parseDouble(ref.txtf_Minmetric.getText()));
 			mdlApriori.buildAssociations(dataSource);
 			ref.txtaConsole.setText(ref.txtaConsole.getText()+"\n"+mdlApriori);
 		} catch (Exception e1) {

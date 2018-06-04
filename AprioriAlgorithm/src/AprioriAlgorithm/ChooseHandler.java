@@ -42,9 +42,13 @@ public class ChooseHandler implements ActionListener {
 		   ref.txtaConsole.setText(ref.txtaConsole.getText()+ref.dat.attributes.get(i)+"\n");
 	   ref.txtaConsole.setText(ref.txtaConsole.getText()+"#############################\n");
 	   ref.txtaConsole.setText(ref.txtaConsole.getText()+"\tInstancias\n#############################\n");
-	   for(int i=0;i<ref.dat.instances.size();i++)
-		   ref.txtaConsole.setText(ref.txtaConsole.getText()+ref.dat.instances.get(i)+"\n");
+	  if(ref.dat.instances.size()<1000) 
+		  for(int i=0;i<ref.dat.instances.size();i++)
+			  ref.txtaConsole.setText(ref.txtaConsole.getText()+ref.dat.instances.get(i)+"\n");
+	  else
+		  ref.txtaConsole.setText(ref.txtaConsole.getText()+"There are more than 1000 instances to show\n");
 	   ref.txtaConsole.setText(ref.txtaConsole.getText()+"\n#############################\n");
+	   
 	}
 
 }
